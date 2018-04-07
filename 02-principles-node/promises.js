@@ -43,16 +43,40 @@ let getSalarie = (employee) => {
     });
 }
 
-getEmployee(1).then(
-    employee => console.log('Employee', employee),
-    err => console.log(err));
+getEmployee(1)
+    .then(
+        employee => console.log('Employee', employee),
+        err => console.log(err)
+    );
 
-getEmployee(11).then(
-    employee => console.log('Employee', employee),
-    err => console.log(err));
+getEmployee(11)
+    .then(
+        employee => console.log('Employee', employee),
+        err => console.log(err)
+    );
 
-getEmployee(1).then(employee => {
-    getSalarie(employee).then(employeeInfo => {
-        console.log(`Salarie of the Employee ${employeeInfo.name} (id=${employeeInfo.id}) is ${employeeInfo.salarie}`);
+getEmployee(1)
+    .then(employee => {
+        getSalarie(employee).then(employeeInfo => {
+            console.log(`Salarie of the Employee ${employeeInfo.name} (id=${employeeInfo.id}) is ${employeeInfo.salarie}`);
+        }, err => console.log(err));
     }, err => console.log(err));
-}, err => console.log(err));
+
+getEmployee(1)
+    .then(employee => {
+        return getSalarie(employee);
+    }).then(employeeInfo => {
+        console.log(`Salarie of the Employee ${employeeInfo.name} (id=${employeeInfo.id}) is ${employeeInfo.salarie}`);
+    });
+
+getEmployee(2)
+    .then(employee => getSalarie(employee))
+    .then(employeeInfo => {
+        console.log(`Salarie of the Employee ${employeeInfo.name} (id=${employeeInfo.id}) is ${employeeInfo.salarie}`);
+    }).catch(err => console.log(err));
+
+getEmployee(11)
+    .then(employee => getSalarie(employee))
+    .then(employeeInfo => {
+        console.log(`Salarie of the Employee ${employeeInfo.name} (id=${employeeInfo.id}) is ${employeeInfo.salarie}`);
+    }).catch(err => console.log(err));
