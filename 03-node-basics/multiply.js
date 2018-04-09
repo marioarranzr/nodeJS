@@ -1,10 +1,14 @@
 const fs = require('fs');
+const colors = require('colors/safe');
 
 let data = '';
 
 let listTable = (base, limit) => {
     return new Promise((resolve, reject) => {
 
+        console.log(colors.green('=================='));
+        console.log(colors.green(`Table ${base}`))
+        console.log(colors.green('=================='));
         data = getMultiplyTable(base, limit);
         resolve(data);
     });
