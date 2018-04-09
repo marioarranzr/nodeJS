@@ -1,0 +1,25 @@
+{
+  "name": "03-node-basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mario800ml/nodeJS.git"
+  },
+  "author": "Mario Arranz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mario800ml/nodeJS/issues"
+  },
+  "homepage": "https://github.com/mario800ml/nodeJS#readme",
+  "dependencies": {
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
