@@ -1,26 +1,4 @@
-const argv = require('yargs')
-    .command('list', 'Print the multiply table', {
-        base: {
-            demand: true,
-            alias: 'b'
-        },
-        limit: {
-            alias: 'l',
-            default: 10
-        }
-    })
-    .command('create', 'Create the multiply table', {
-        base: {
-            demand: true,
-            alias: 'b'
-        },
-        limit: {
-            alias: 'l',
-            default: 10
-        }
-    })
-    .argv;
-
+const argv = require('./config/yargs').argv;
 const { createFile, listTable } = require('./multiply');
 
 let command = argv._[0];
