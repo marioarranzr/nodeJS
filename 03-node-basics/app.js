@@ -1,13 +1,43 @@
-const { createFile } = require('./multiply');
-// const multiply = require('./multiply');
+const argv = require('yargs')
+    .command('list', 'Print the multiply table', {
+        base: {
+            demand: true,
+            alias: 'b'
+        },
+        limit: {
+            alias: 'l',
+            default: 10
+        }
+    })
+    .command('create', 'Create the multiply table', {
+        base: {
+            demand: true,
+            alias: 'b'
+        },
+        limit: {
+            alias: 'l',
+            default: 10
+        }
+    })
+    .argv;
 
-// console.log(process.argv);
-let argv = process.argv;
-let parameter = argv[2];
-let base = parameter.split('=')[1];
+const { createFile, listTable } = require('./multiply');
 
-// to run the app `nodemon app.js --base=5`
+let command = argv._[0];
 
-createFile(base)
-    .then(file => console.log(`The file table-${base}.txt has been saved!`))
-    .catch(e => console.log(e));
+switch (command) {
+    case 'list':
+        listTable(argv.base, argv.limit)
+            .then(list => console.log(list))
+            .catch(e => console.log(e));
+
+        break;
+    case 'create':
+        createFile(argv.base, argv.limit)
+            .then(file => console.log(`The file table-${argv.base}.txt has been saved!`))
+            .catch(e => console.log(e));
+        break;
+
+    default:
+        console.log('Not recognised command');
+}
