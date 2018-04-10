@@ -1,18 +1,17 @@
+const description = {
+    demand: true,
+    alias: 'd'
+}
+
 const create_opts = {
-    description: {
-        demand: true,
-        alias: 'd'
-    },
+    description,
     completed: {
         alias: 'c',
         default: true
     }
 };
 const update_opts = {
-    description: {
-        demand: true,
-        alias: 'd'
-    }
+    description
 };
 
 const argv = require('yargs')
