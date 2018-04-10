@@ -25,3 +25,13 @@ Todo app
 npm install
 node app help
 ```
+## 05-weather
+Weather app
+>axios library `https://www.npmjs.com/package/axios` returns a *Promise* (that is the reason of using it instead of request library (`https://www.npmjs.com/package/request`)
+
+>Run this command:
+```
+npm install
+node app help
+node app -a "London"
+```
