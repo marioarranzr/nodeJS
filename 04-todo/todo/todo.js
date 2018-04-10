@@ -11,7 +11,17 @@ const saveDB = () => {
 
 }
 
+const loadDB = () => {
+    try {
+        todoList = require('../db/data.json');
+    } catch (error) {
+        todoList = [];
+    }
+}
+
 const create = (description) => {
+
+    loadDB();
 
     let todo = {
         description,
@@ -23,6 +33,25 @@ const create = (description) => {
     return todo;
 }
 
+const list = () => {
+    loadDB();
+    return todoList;
+}
+
+const update = (description, completed = true) => {
+    loadDB();
+    let index = todoList.findIndex(task => task.description == description);
+    if (index < 0) {
+        return false;
+    } else {
+        todoList[index].completed = completed;
+        saveDB();
+        return true;
+    }
+}
+
 module.exports = {
-    create
+    create,
+    list,
+    update
 }
