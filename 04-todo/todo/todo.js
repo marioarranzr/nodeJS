@@ -8,7 +8,6 @@ const saveDB = () => {
     fs.writeFile('db/data.json', data, (err) => {
         if (err) throw new Err(err);
     });
-
 }
 
 const loadDB = () => {
@@ -50,8 +49,24 @@ const update = (description, completed = true) => {
     }
 }
 
+const remove = (description) => {
+    loadDB();
+
+    let newList = todoList.filter(task => task.description !== description);
+    console.log(todoList);
+    console.log(newList);
+    if (newList.length === todoList.length) {
+        return false;
+    } else {
+        todoList = newList;
+        saveDB();
+        return true;
+    }
+}
+
 module.exports = {
     create,
     list,
-    update
+    update,
+    remove
 }

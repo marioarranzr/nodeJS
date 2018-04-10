@@ -1,7 +1,7 @@
 const argv = require('./config/yargs').argv;
 const colors = require('colors/safe');
 
-const { create, list, update } = require('./todo/todo');
+const { create, list, update, remove } = require('./todo/todo');
 
 let command = argv._[0];
 
@@ -24,6 +24,10 @@ switch (command) {
     case 'update':
         let updated = update(argv.description, argv.completed);
         console.log(updated ? `${colors.green('updated')} ` : `${colors.red('not updated')}`);
+        break;
+    case 'remove':
+        let removed = remove(argv.description);
+        console.log(removed ? `${colors.green('removed')} ` : `${colors.red('not removed')}`);
         break;
 
     default:
