@@ -18,3 +18,10 @@ Node modules, npm, 3rd party libraries
 npm install
 node app help
 ```
+## 04-todo
+Todo app
+>Run this command:
+```
+npm install
+node app help
+```
