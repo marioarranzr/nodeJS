@@ -35,3 +35,15 @@ npm install
 node app help
 node app -a "London"
 ```
+## 06-webserver
+Webserver using express, handlebars (hbs)
+>axios library `https://www.npmjs.com/package/axios` returns a *Promise* (that is the reason of using it instead of request library (`https://www.npmjs.com/package/request`)
+
+>The project has been deployed to [Firebase](https://node-webserver-d9ee7.firebaseapp.com/), so it has been reorganised to that
+
+>Run this command (from **functions** folder):
+```
+npm install
+node app help
+node index or npm start or npm run start or npm run nodemon
+```

@@ -1,0 +1,19 @@
+{
+    "name": "06-webserver",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "nodemon": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.3",
+        "firebase-admin": "^5.12.0",
+        "firebase-functions": "^1.0.1",
+        "hbs": "^4.0.1"
+    }
+}
