@@ -20,6 +20,9 @@ node app help
 ```
 ## 04-todo
 Todo app
+
+>Node modules used: `colors`, `yargs`
+
 >Run this command:
 ```
 npm install
@@ -29,6 +32,8 @@ node app help
 Weather app
 >axios library `https://www.npmjs.com/package/axios` returns a *Promise* (that is the reason of using it instead of request library (`https://www.npmjs.com/package/request`)
 
+>Node modules used: `axios`, `yargs`
+
 >Run this command:
 ```
 npm install
@@ -37,7 +42,8 @@ node app -a "London"
 ```
 ## 06-webserver
 Webserver using express, handlebars (hbs)
->axios library `https://www.npmjs.com/package/axios` returns a *Promise* (that is the reason of using it instead of request library (`https://www.npmjs.com/package/request`)
+
+>Node modules used: `express`, `hbs` (and `firebase-admin`, `firebase-functions` to deply in firebase)
 
 >The project has been deployed to [Firebase](https://node-webserver-d9ee7.firebaseapp.com/), so it has been reorganised to that
 
@@ -48,6 +54,8 @@ node index or npm start or npm run start or npm run nodemon
 ```
 ## 07-restserver
 Restserver using express
+
+>Node modules used: `express`, `body-parser`, `mongoose`, `mongoose-unique-validator`
 
 >The project has been deployed to [Heroku](https://evening-sierra-26979.herokuapp.com)
 
