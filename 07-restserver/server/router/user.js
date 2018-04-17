@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../model/user');
 
 const app = express();
 
@@ -8,7 +9,27 @@ app.get('/user', function(req, res) {
 
 app.post('/user', function(req, res) {
     let body = req.body;
-    res.json({ user: body });
+
+    let user = new User({
+        name: body.name,
+        email: body.email,
+        password: body.password,
+        role: body.role
+    });
+
+    user.save((err, userDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        res.json({
+            ok: true,
+            user: userDB
+        });
+    })
 });
 
 app.put('/user/:id', function(req, res) {
