@@ -55,7 +55,7 @@ node index or npm start or npm run start or npm run nodemon
 ## 07-restserver
 Restserver using express
 
->Node modules used: `express`, `body-parser`, `mongoose`, `mongoose-unique-validator`
+>Node modules used: `express`, `body-parser`, `mongoose`, `mongoose-unique-validator`, `bcrypt`, `underscore`
 
 >The project has been deployed to [Heroku](https://evening-sierra-26979.herokuapp.com)
 

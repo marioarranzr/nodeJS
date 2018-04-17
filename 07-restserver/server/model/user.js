@@ -39,6 +39,15 @@ const userSchema = new Schema({
     }
 });
 
+// delete password in the returned JSON object
+userSchema.methods.toJSON = function() {
+    let user = this;
+    let userObject = user.toObject();
+    delete userObject.password;
+
+    return userObject;
+}
+
 userSchema.plugin(uniqueValidator, { message: 'The attribute {PATH} must be unique' });
 
 module.exports = mongoose.model('user', userSchema);
