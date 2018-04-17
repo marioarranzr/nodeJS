@@ -1,6 +1,9 @@
 require('./config/config');
+const userApp = require('./router/user');
 
-const express = require('express')
+const express = require('express');
+const mongoose = require('mongoose');
+
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -10,28 +13,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+app.use(userApp);
+
 app.get('/', function(req, res) {
     res.json('Hello World')
 });
 
-app.get('/user', function(req, res) {
-    res.json('Hello World')
-});
-
-app.post('/user', function(req, res) {
-    let body = req.body;
-    res.json({ user: body });
-});
-
-app.put('/user/:id', function(req, res) {
-    let id = req.params.id;
-    res.json({
-        id
-    });
-});
-
-app.delete('/user', function(req, res) {
-    res.json('Hello World')
+// DB connection
+mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
+    if (err) {
+        throw err;
+    }
 });
 
 app.listen(process.env.PORT);
