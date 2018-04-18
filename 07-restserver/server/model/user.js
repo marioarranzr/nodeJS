@@ -29,7 +29,7 @@ const userSchema = new Schema({
         default: 'USER_ROLE',
         enum: roles
     },
-    state: {
+    active: {
         type: Boolean,
         default: true
     },

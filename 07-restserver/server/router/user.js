@@ -13,7 +13,9 @@ app.get('/user', function(req, res) {
     let limit = req.query.limit || 5;
     limit = Number(limit);
 
-    User.find({})
+    let filter = {};
+
+    User.find(filter, 'name email role active google img')
         .skip(from)
         .limit(limit)
         .exec((err, users) => {
@@ -24,9 +26,12 @@ app.get('/user', function(req, res) {
                 });
             }
 
-            res.json({
-                ok: true,
-                users
+            User.count(filter, (err, count) => {
+                res.json({
+                    ok: true,
+                    users,
+                    count
+                });
             });
         });
 });
@@ -58,7 +63,7 @@ app.post('/user', function(req, res) {
 
 app.put('/user/:id', function(req, res) {
     let id = req.params.id;
-    let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'state']);
+    let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'active']);
 
     User.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, userDB) => {
         if (err) {
@@ -75,8 +80,53 @@ app.put('/user/:id', function(req, res) {
     });
 });
 
-app.delete('/user', function(req, res) {
-    res.json('Hello World')
+app.delete('/user/:id', function(req, res) {
+    let id = req.params.id;
+
+    User.findByIdAndUpdate(id, { active: false }, { new: true, runValidators: true }, (err, userDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        res.json({
+            ok: true,
+            user: userDB
+        });
+    });
+
+
+
+
+
+
+
+
+
+    User.findByIdAndRemove(id, {}, (err, deletedUser) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        if (!deletedUser) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'Not found user'
+                }
+            });
+        }
+
+        res.json({
+            ok: true,
+            user: deletedUser
+        });
+    });
 });
 
 module.exports = app;
