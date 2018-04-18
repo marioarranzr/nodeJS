@@ -13,7 +13,7 @@ app.get('/user', function(req, res) {
     let limit = req.query.limit || 5;
     limit = Number(limit);
 
-    let filter = {};
+    let filter = { active: true };
 
     User.find(filter, 'name email role active google img')
         .skip(from)
@@ -83,7 +83,8 @@ app.put('/user/:id', function(req, res) {
 app.delete('/user/:id', function(req, res) {
     let id = req.params.id;
 
-    User.findByIdAndUpdate(id, { active: false }, { new: true, runValidators: true }, (err, userDB) => {
+    // User.findByIdAndRemove(id, {}, (err, deletedUser) => {
+    User.findByIdAndUpdate(id, { active: false }, { new: true }, (err, userDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -94,37 +95,6 @@ app.delete('/user/:id', function(req, res) {
         res.json({
             ok: true,
             user: userDB
-        });
-    });
-
-
-
-
-
-
-
-
-
-    User.findByIdAndRemove(id, {}, (err, deletedUser) => {
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        }
-
-        if (!deletedUser) {
-            return res.status(400).json({
-                ok: false,
-                err: {
-                    message: 'Not found user'
-                }
-            });
-        }
-
-        res.json({
-            ok: true,
-            user: deletedUser
         });
     });
 });

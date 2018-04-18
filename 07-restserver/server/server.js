@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 });
 
 // DB connection
-mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
+mongoose.connect(process.env.urlDB, (err, res) => {
     if (err) {
         throw err;
     }
