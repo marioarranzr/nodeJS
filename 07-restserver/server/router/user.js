@@ -37,7 +37,7 @@ app.get('/user', Authorization.verifyToken, function(req, res) {
         });
 });
 
-app.post('/user', Authorization.verifyToken, function(req, res) {
+app.post('/user', [Authorization.verifyToken, Authorization.verifyAdminRole], function(req, res) {
     let body = req.body;
 
     let user = new User({
@@ -81,7 +81,7 @@ app.put('/user/:id', Authorization.verifyToken, function(req, res) {
     });
 });
 
-app.delete('/user/:id', Authorization.verifyToken, function(req, res) {
+app.delete('/user/:id', [Authorization.verifyToken, Authorization.verifyAdminRole], function(req, res) {
     let id = req.params.id;
 
     // User.findByIdAndRemove(id, {}, (err, deletedUser) => {

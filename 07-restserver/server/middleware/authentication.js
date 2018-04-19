@@ -22,6 +22,24 @@ let verifyToken = (req, res, next) => {
 
 }
 
+let verifyAdminRole = (req, res, next) => {
+    let user = req.user;
+    let role = user.role;
+
+    if (role !== 'ADMIN_ROLE') {
+        return res.status(403).json({
+            ok: false,
+            err: {
+                message: 'You are not admin'
+            }
+        });
+    }
+
+    next();
+}
+
+
 module.exports = {
-    verifyToken
+    verifyToken,
+    verifyAdminRole
 }
