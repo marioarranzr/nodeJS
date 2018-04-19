@@ -1,5 +1,4 @@
 require('./config/config');
-const userApp = require('./router/user');
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -13,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(userApp);
+// router
+app.use(require('./router/index'));
 
 app.get('/', function(req, res) {
     res.json('Hello World')
