@@ -6,7 +6,7 @@ const Authorization = require('../middleware/authentication'); //const { verifyT
 
 const app = express();
 
-app.get('/user', Authorization.verifyToken, function(req, res) {
+app.get('/users', Authorization.verifyToken, function(req, res) {
 
     let from = req.query.from || 0;
     from = Number(from);
@@ -37,7 +37,7 @@ app.get('/user', Authorization.verifyToken, function(req, res) {
         });
 });
 
-app.get('/user/:id', (req, res) => {
+app.get('/users/:id', (req, res) => {
     let id = req.params.id;
     User.findById(id, (err, userDB) => {
         if (err) {
@@ -63,7 +63,7 @@ app.get('/user/:id', (req, res) => {
 
 });
 
-app.post('/user', [Authorization.verifyToken, Authorization.verifyAdminRole], function(req, res) {
+app.post('/users', [Authorization.verifyToken, Authorization.verifyAdminRole], function(req, res) {
     let body = req.body;
 
     let user = new User({
@@ -81,14 +81,14 @@ app.post('/user', [Authorization.verifyToken, Authorization.verifyAdminRole], fu
             });
         }
 
-        res.json({
+        res.status(201).json({
             ok: true,
             user: userDB
         });
     })
 });
 
-app.put('/user/:id', Authorization.verifyToken, function(req, res) {
+app.put('/users/:id', Authorization.verifyToken, function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'active']);
 
@@ -107,7 +107,7 @@ app.put('/user/:id', Authorization.verifyToken, function(req, res) {
     });
 });
 
-app.delete('/user/:id', [Authorization.verifyToken, Authorization.verifyAdminRole], function(req, res) {
+app.delete('/users/:id', [Authorization.verifyToken, Authorization.verifyAdminRole], function(req, res) {
     let id = req.params.id;
 
     // User.findByIdAndRemove(id, {}, (err, deletedUser) => {

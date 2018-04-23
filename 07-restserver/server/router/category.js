@@ -1,12 +1,11 @@
 const express = require('express');
-const _ = require('underscore');
 const Category = require('../model/category');
 
 const Authorization = require('../middleware/authentication'); //const { verifyToken } = require('../middleware/authentication')
 
 const app = express();
 
-app.get('/category', Authorization.verifyToken, (req, res) => {
+app.get('/categories', Authorization.verifyToken, (req, res) => {
 
     let filter = {};
 
@@ -30,7 +29,7 @@ app.get('/category', Authorization.verifyToken, (req, res) => {
         });
 });
 
-app.get('/category/:id', Authorization.verifyToken, (req, res) => {
+app.get('/categories/:id', Authorization.verifyToken, (req, res) => {
     let id = req.params.id;
     Category.findById(id)
         .populate('user', 'name email')
@@ -58,7 +57,7 @@ app.get('/category/:id', Authorization.verifyToken, (req, res) => {
 
 });
 
-app.post('/category', Authorization.verifyToken, (req, res) => {
+app.post('/categories', Authorization.verifyToken, (req, res) => {
     let body = req.body;
     let category = new Category({
         name: body.name,
@@ -81,7 +80,7 @@ app.post('/category', Authorization.verifyToken, (req, res) => {
             });
         }
 
-        res.json({
+        res.status(201).json({
             ok: true,
             category: categoryDB
         });
@@ -89,7 +88,7 @@ app.post('/category', Authorization.verifyToken, (req, res) => {
 
 });
 
-app.put('/category/:id', Authorization.verifyToken, (req, res) => {
+app.put('/categories/:id', Authorization.verifyToken, (req, res) => {
     let id = req.params.id;
     let body = req.body;
     let descCategory = {
@@ -111,7 +110,7 @@ app.put('/category/:id', Authorization.verifyToken, (req, res) => {
     });
 });
 
-app.delete('/category/:id', [Authorization.verifyToken, Authorization.verifyAdminRole], (req, res) => {
+app.delete('/categories/:id', [Authorization.verifyToken, Authorization.verifyAdminRole], (req, res) => {
     let id = req.params.id;
 
     Category.findByIdAndRemove(id, (err, categoryDB) => {
