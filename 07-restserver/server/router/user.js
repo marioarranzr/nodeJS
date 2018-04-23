@@ -37,6 +37,32 @@ app.get('/user', Authorization.verifyToken, function(req, res) {
         });
 });
 
+app.get('/user/:id', (req, res) => {
+    let id = req.params.id;
+    User.findById(id, (err, userDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        if (!userDB) {
+            return res.status(500).json({
+                ok: false,
+                err: {
+                    message: 'There is not any user with that ID'
+                }
+            });
+        }
+        res.json({
+            ok: true,
+            user: userDB,
+        });
+    });
+
+});
+
 app.post('/user', [Authorization.verifyToken, Authorization.verifyAdminRole], function(req, res) {
     let body = req.body;
 
