@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 // public folder available
 app.use(express.static(path.resolve(__dirname, '../public')));
 
-// router
-app.use(require('./router/index'));
+// routes
+app.use(require('./routes/index'));
 
 // DB connection
 mongoose.connect(process.env.urlDB, (err, res) => {
